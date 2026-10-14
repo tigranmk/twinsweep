@@ -2,6 +2,10 @@
 
 **Find duplicate files by content and clean them up safely.**
 
+```bash
+pipx install twinsweep
+```
+
 Duplicate photos from phone imports, `report (1).pdf` in Downloads, a backup
 folder that is a near-copy of your documents: duplicates pile up on every
 machine. twinsweep finds files with identical content, regardless of name or
@@ -42,21 +46,41 @@ Found 912 duplicate groups, 1404 redundant files, 38.2 GiB reclaimable.
 
 ## Install
 
-You need Python 3.9 or newer (`python3 --version`).
-
-**Option A: run it in place (no install).** From this folder:
+You need Python 3.9 or newer (`python3 --version`). twinsweep is on
+[PyPI](https://pypi.org/project/twinsweep/). Installing it with
+[pipx](https://pipx.pypa.io/) is recommended, because it keeps the tool in its
+own environment and puts the `twinsweep` command on your PATH:
 
 ```bash
-python3 -m twinsweep ~/Downloads
+pipx install twinsweep            # or: pip install twinsweep
+twinsweep --help
 ```
 
-**Option B: install the `twinsweep` command** (recommended), with
-[pipx](https://pipx.pypa.io/) or pip:
+If you don't have pipx yet, install it with `brew install pipx` (macOS) or
+`python3 -m pip install --user pipx`, then run `pipx ensurepath` and open a
+new terminal.
+
+**Optional: cross-platform Trash support.** `--action trash` works out of the
+box on macOS. On Linux and Windows, install the extra:
 
 ```bash
-pipx install .                 # or: pip install .
-pipx install '.[trash]'        # optional: adds cross-platform "move to Trash"
-twinsweep --help
+pipx install 'twinsweep[trash]'
+```
+
+**Upgrade or remove:**
+
+```bash
+pipx upgrade twinsweep
+pipx uninstall twinsweep
+```
+
+**From source.** To run the latest code without installing:
+
+```bash
+git clone https://github.com/tigranmk/twinsweep.git
+cd twinsweep
+python3 -m twinsweep ~/Downloads   # run in place, no install
+pipx install .                     # or install the command from this checkout
 ```
 
 ## Usage
