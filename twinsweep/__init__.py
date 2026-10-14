@@ -13,4 +13,4 @@ from .finder import DuplicateGroup, find_duplicates
 from .scanner import FileEntry, scan
 
 __all__ = ["DuplicateGroup", "FileEntry", "find_duplicates", "scan", "__version__"]
-__version__ = "1.0.1"
+__version__ = "1.0.2"

@@ -60,8 +60,8 @@ If you don't have pipx yet, install it with `brew install pipx` (macOS) or
 `python3 -m pip install --user pipx`, then run `pipx ensurepath` and open a
 new terminal.
 
-**Optional: cross-platform Trash support.** `--action trash` works out of the
-box on macOS. On Linux and Windows, install the extra:
+**Optional: Trash support on Linux and Windows.** On macOS, `--action trash`
+works out of the box. On Linux and Windows, install the extra:
 
 ```bash
 pipx install 'twinsweep[trash]'
@@ -110,7 +110,7 @@ twinsweep PATH [PATH ...] [options]
 | Action | What happens to each duplicate | Reversible? |
 | --- | --- | --- |
 | `report` *(default)* | nothing | n/a |
-| `trash` | moved to the OS Trash/Recycle Bin | yes, from the Trash |
+| `trash` | moved to the Trash/Recycle Bin | yes: on macOS, Finder's **Put Back** restores it |
 | `move` | moved under `--move-to DIR`, keeping its folder layout | yes, move it back |
 | `hardlink` | replaced by a hard link to the kept copy (same filesystem only) | the paths still work; contents are now shared |
 | `symlink` | replaced by a symbolic link to the kept copy | the paths still work |
@@ -120,6 +120,16 @@ Destructive actions prompt `Continue? [y/N]`. Add `--yes` to skip the prompt
 (for scripts) or `--dry-run` to see exactly what would happen. When stdin
 isn't a terminal and `--yes` isn't given, twinsweep refuses and changes
 nothing.
+
+**How `trash` works on macOS.** twinsweep asks Finder to trash the files,
+sending them in batches, so each drive uses its own Trash and **Put Back**
+works exactly as if you had deleted them in Finder. The first time, macOS may
+ask whether your terminal may control Finder: click **OK**. If you decline,
+or Finder isn't available (for example over SSH), twinsweep falls back to the
+optional Send2Trash package, then to moving files into `~/.Trash`, and reports
+which method it used for each file. To change your answer later, go to
+System Settings → Privacy & Security → Automation. Set
+`TWINSWEEP_NO_FINDER=1` to skip Finder entirely.
 
 > **Tip:** a hard link means both paths share the *same* data. Editing one
 > edits the "other". That suits read-only archives (photos, music, installers)

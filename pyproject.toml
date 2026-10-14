@@ -25,8 +25,8 @@ Homepage = "https://github.com/tigranmk/twinsweep"
 Issues = "https://github.com/tigranmk/twinsweep/issues"
 
 [project.optional-dependencies]
-# Cross-platform "move to Trash/Recycle Bin". Without it, --action trash
-# still works on macOS; on Linux/Windows it asks you to install this.
+# "Move to Trash/Recycle Bin" on Linux and Windows. macOS uses Finder and
+# needs nothing extra; there it is only a fallback if Finder is unavailable.
 trash = ["Send2Trash>=1.8"]
 
 [project.scripts]
