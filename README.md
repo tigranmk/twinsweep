@@ -295,4 +295,4 @@ Built entirely on the Python standard library (PSF License): `hashlib`
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/tigranmk/twinsweep/blob/main/LICENSE)
